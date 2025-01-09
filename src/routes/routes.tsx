@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import About from "../pages/About";
 import Content from "../pages/Content";
-import { AdminPaths } from "./routes.admin";
+import { adminRoutes } from "./routes.admin";
 
 const router = createBrowserRouter([
   {
@@ -20,9 +20,9 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/admin",
+    path: "admin",
     element: <App />,
-    children: AdminPaths,
+    children: adminRoutes,
   },
 ]);
 export default router;
