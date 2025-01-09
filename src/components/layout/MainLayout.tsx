@@ -6,6 +6,7 @@ import {
 import { Layout, Menu, MenuProps, theme } from "antd";
 import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
+import { adminSideBar } from "../../routes/routes.admin";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -74,7 +75,7 @@ const MainLayout: React.FC = () => {
           theme="dark"
           mode="inline"
           defaultSelectedKeys={["4"]}
-          items={items}
+          items={adminSideBar}
         />
       </Sider>
       <Layout>
