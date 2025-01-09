@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import About from "../pages/About";
 import Content from "../pages/Content";
-import AdminLayout from "../pages/admin/AdminLayout";
+import { AdminPaths } from "./routes.admin";
 
 const router = createBrowserRouter([
   {
@@ -22,12 +22,7 @@ const router = createBrowserRouter([
   {
     path: "/admin",
     element: <App />,
-    children: [
-      {
-        index: true,
-        element: <AdminLayout />,
-      },
-    ],
+    children: AdminPaths,
   },
 ]);
 export default router;
