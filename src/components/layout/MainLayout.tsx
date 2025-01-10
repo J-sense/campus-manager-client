@@ -1,39 +1,40 @@
-import {
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-} from "@ant-design/icons";
-import { Layout, Menu, MenuProps, theme } from "antd";
+// import {
+//   UploadOutlined,
+//   UserOutlined,
+//   VideoCameraOutlined,
+// } from "@ant-design/icons";
+import { Layout, Menu, theme } from "antd";
 import React from "react";
-import { NavLink, Outlet } from "react-router-dom";
-import { adminSideBar } from "../../routes/routes.admin";
+import { Outlet } from "react-router-dom";
+import { adminPaths2, adminSideBar } from "../../routes/routes.admin";
+import { sideBarGenerator } from "../../utils/SidebarGenerator";
 
 const { Header, Content, Footer, Sider } = Layout;
 
-const items: MenuProps["items"] = [
-  {
-    key: "Dashboard",
-    label: <NavLink to="/admin">Dashboard</NavLink>,
-  },
-  {
-    key: "User Management",
-    label: "User Management",
-    children: [
-      {
-        key: "Create Student",
-        label: <NavLink to="/admin/create-student">Create Student</NavLink>,
-      },
-      {
-        key: "Create Faculty",
-        label: <NavLink to="/admin/create-faculty">Create Faculty</NavLink>,
-      },
-      {
-        key: "Create Admin",
-        label: <NavLink to="/admin/create-admin">Create Admin</NavLink>,
-      },
-    ],
-  },
-];
+// const items: MenuProps["items"] = [
+//   {
+//     key: "Dashboard",
+//     label: <NavLink to="/admin">Dashboard</NavLink>,
+//   },
+//   {
+//     key: "User Management",
+//     label: "User Management",
+//     children: [
+//       {
+//         key: "Create Student",
+//         label: <NavLink to="/admin/create-student">Create Student</NavLink>,
+//       },
+//       {
+//         key: "Create Faculty",
+//         label: <NavLink to="/admin/create-faculty">Create Faculty</NavLink>,
+//       },
+//       {
+//         key: "Create Admin",
+//         label: <NavLink to="/admin/create-admin">Create Admin</NavLink>,
+//       },
+//     ],
+//   },
+// ];
 
 const MainLayout: React.FC = () => {
   const {
@@ -75,11 +76,11 @@ const MainLayout: React.FC = () => {
           theme="dark"
           mode="inline"
           defaultSelectedKeys={["4"]}
-          items={adminSideBar}
+          items={sideBarGenerator(adminPaths2, "admin")}
         />
       </Sider>
       <Layout>
-        <Header style={{ padding: 0, background: colorBgContainer }} />
+        <Header style={{ padding: 0, backgroundColor: "blue" }} />
         <Content style={{ margin: "24px 16px 0" }}>
           <div
             style={{
