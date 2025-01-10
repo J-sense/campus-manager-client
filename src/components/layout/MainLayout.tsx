@@ -3,13 +3,13 @@
 //   UserOutlined,
 //   VideoCameraOutlined,
 // } from "@ant-design/icons";
-import { Layout, Menu, theme } from "antd";
+import { Layout, theme } from "antd";
 import React from "react";
 import { Outlet } from "react-router-dom";
-import { adminPaths2, adminSideBar } from "../../routes/routes.admin";
-import { sideBarGenerator } from "../../utils/SidebarGenerator";
 
-const { Header, Content, Footer, Sider } = Layout;
+import SideBarLayout from "./SideBarLayout";
+
+const { Header, Content, Footer } = Layout;
 
 // const items: MenuProps["items"] = [
 //   {
@@ -43,42 +43,7 @@ const MainLayout: React.FC = () => {
 
   return (
     <Layout style={{ height: "100vh" }}>
-      <Sider
-        breakpoint="lg"
-        collapsedWidth="0"
-        onBreakpoint={(broken) => {
-          console.log(broken);
-        }}
-        onCollapse={(collapsed, type) => {
-          console.log(collapsed, type);
-        }}
-      >
-        <div
-          style={{
-            height: "40px",
-            alignItems: "center",
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          {" "}
-          <h1
-            style={{
-              fontWeight: "bold",
-              fontFamily: "monospace",
-              color: "white",
-            }}
-          >
-            campus manager
-          </h1>
-        </div>
-        <Menu
-          theme="dark"
-          mode="inline"
-          defaultSelectedKeys={["4"]}
-          items={sideBarGenerator(adminPaths2, "admin")}
-        />
-      </Sider>
+      <SideBarLayout />
       <Layout>
         <Header style={{ padding: 0, backgroundColor: "blue" }} />
         <Content style={{ margin: "24px 16px 0" }}>
