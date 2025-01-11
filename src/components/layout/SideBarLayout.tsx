@@ -3,8 +3,26 @@ import Sider from "antd/es/layout/Sider";
 
 import { sideBarGenerator } from "../../utils/SidebarGenerator";
 import { adminPaths } from "../../routes/routes.admin";
-
+import { facultyPaths } from "../../routes/routes.faculty";
+const userRole = {
+  ADMIN: "admin",
+  FACULTY: "faculty",
+  STUDENT: "student",
+};
 const SideBarLayout = () => {
+  const role = "faculty";
+  let sideBarItems;
+  switch (role) {
+    case userRole.ADMIN:
+      sideBarItems = sideBarGenerator(adminPaths, userRole.ADMIN);
+      break;
+    case userRole.FACULTY:
+      sideBarItems = sideBarGenerator(facultyPaths, userRole.FACULTY);
+      break;
+
+    default:
+      break;
+  }
   return (
     <Sider
       breakpoint="lg"
@@ -39,7 +57,7 @@ const SideBarLayout = () => {
         theme="dark"
         mode="inline"
         defaultSelectedKeys={["4"]}
-        items={sideBarGenerator(adminPaths, "admin")}
+        items={sideBarItems}
       />
     </Sider>
   );
