@@ -8,6 +8,9 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 
 import SideBarLayout from "./SideBarLayout";
+import { Button } from "antd/es/radio";
+import { useAppDispatch } from "../../redux/hooks";
+import { logOut } from "../../redux/features/auth/authSlice";
 
 const { Header, Content, Footer } = Layout;
 
@@ -37,15 +40,20 @@ const { Header, Content, Footer } = Layout;
 // ];
 
 const MainLayout: React.FC = () => {
+  const dispatch = useAppDispatch();
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
-
+  const handleLogout = () => {
+    dispatch(logOut());
+  };
   return (
     <Layout style={{ height: "100vh" }}>
       <SideBarLayout />
       <Layout>
-        <Header style={{ padding: 0, backgroundColor: "blue" }} />
+        <Header style={{ padding: 0, backgroundColor: "blue" }}>
+          <Button onClick={handleLogout}>Logout</Button>
+        </Header>
         <Content style={{ margin: "24px 16px 0" }}>
           <div
             style={{
