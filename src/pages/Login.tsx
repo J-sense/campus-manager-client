@@ -35,7 +35,12 @@ const Login = () => {
         <label htmlFor="">ID</label>
         <input type="text" id="id" {...register("id")} />
         <label htmlFor="">PASSWORD</label>
-        <input type="password" id="password" {...register("password")} />
+        <input
+          type="password"
+          id="password"
+          {...register("password")}
+          defaultValue={"admin123"}
+        />
         <button type="submit">SUBMIT</button>
       </form>
     </div>
