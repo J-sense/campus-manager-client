@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store";
 // import { Root } from "react-dom/client";
-import { setUser } from "../features/auth/authSlice";
+import { logOut, setUser } from "../features/auth/authSlice";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: "http://localhost:5000/api/v1",
@@ -24,15 +24,19 @@ const baseQueryWithRefreshToken = async (args, api, extraOptions) => {
       credentials: "include",
     });
     const data = await res.json();
-    const user = (api.getState() as RootState).auth.user;
-    api.dispatch(
-      setUser({
-        user: user,
-        token: data.data.accessToken,
-      })
-    );
-    result = await baseQuery(args, api, extraOptions);
-    console.log(data);
+    if (data?.data?.accessToken) {
+      const user = (api.getState() as RootState).auth.user;
+      api.dispatch(
+        setUser({
+          user: user,
+          token: data.data.accessToken,
+        })
+      );
+      result = await baseQuery(args, api, extraOptions);
+      console.log(data);
+    } else {
+      api.dispatch(logOut());
+    }
   }
   return result;
 };
