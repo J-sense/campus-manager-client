@@ -1,16 +1,18 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { FieldValues, useForm } from "react-hook-form";
+import { FieldValues } from "react-hook-form";
 import { useLoginMutation } from "../redux/features/auth/authApi";
 import { useAppDispatch } from "../redux/hooks";
 import { setUser, TUser } from "../redux/features/auth/authSlice";
 import { varifyToken } from "../utils/VvarifyToken";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import Phform from "../components/form/Phform";
+import PhInput from "../components/form/PhInput";
+import { Row } from "antd";
 
 const Login = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { register, handleSubmit } = useForm();
   const [login] = useLoginMutation();
 
   const onSubmit = async (data: FieldValues) => {
@@ -28,22 +30,18 @@ const Login = () => {
     } catch (error) {
       toast.error("Something went wrong", { id: toastId, duration: 2000 });
     }
+    console.log(data);
   };
   return (
-    <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
+    <Row justify={"center"} align={"middle"} style={{ height: "100vh" }}>
+      <Phform onSubmit={onSubmit}>
         <label htmlFor="">ID</label>
-        <input type="text" id="id" {...register("id")} />
+        <PhInput type="text" name="id" />
         <label htmlFor="">PASSWORD</label>
-        <input
-          type="password"
-          id="password"
-          {...register("password")}
-          defaultValue={"admin123"}
-        />
+        <PhInput type="text" name="password" />
         <button type="submit">SUBMIT</button>
-      </form>
-    </div>
+      </Phform>
+    </Row>
   );
 };
 
