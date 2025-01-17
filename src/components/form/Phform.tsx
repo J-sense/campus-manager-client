@@ -1,3 +1,4 @@
+import { Form } from "antd";
 import { ReactNode } from "react";
 import {
   FieldValues,
@@ -8,12 +9,22 @@ import {
 type TFormProps = {
   children: ReactNode;
   onSubmit: SubmitErrorHandler<FieldValues>;
+} & TFormConfig;
+type TFormConfig = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  resolver?: any;
 };
-const Phform = ({ children, onSubmit }: TFormProps) => {
-  const methods = useForm();
+const Phform = ({ children, onSubmit, resolver }: TFormProps) => {
+  const formConfig: TFormConfig = {};
+  if (resolver) {
+    formConfig["resolver"] = resolver;
+  }
+  const methods = useForm(formConfig);
   return (
     <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(onSubmit)}>{children}</form>
+      <Form layout="vertical" onFinish={methods.handleSubmit(onSubmit)}>
+        {children}
+      </Form>
     </FormProvider>
   );
 };
