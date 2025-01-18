@@ -35,6 +35,7 @@ const SideBarLayout = () => {
       onCollapse={(collapsed, type) => {
         console.log(collapsed, type);
       }}
+      style={{ backgroundColor: "dark" }}
     >
       <div
         style={{

@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useAddAcademicSemesterMutation } from "../../../redux/features/academicSemester/academicSemesterApi";
 import { toast } from "sonner";
+import { TResponse } from "../../../global";
 // import { useAddAcademicSemesterMutation } from "../../../redux/features/academicSemester/academicSemesterApi";
 // import { toast } from "sonner";
 const academicSemesterSchema = z.object({
@@ -49,7 +50,13 @@ const months = [
   "November",
   "December",
 ];
-
+type TData = {
+  data: {
+    message: string;
+    success: boolean;
+    stack: string;
+  };
+};
 const startMonth = months.map((singleMonth) => ({
   value: String(singleMonth),
   label: String(singleMonth),
@@ -70,7 +77,10 @@ const CreateAcademicSemester = () => {
     };
     console.log(semesterData);
     try {
-      const result = await addAcademicSemester(semesterData);
+      const result = (await addAcademicSemester(semesterData)) as TResponse;
+      if (result.error as TData) {
+        toast.error(result.error.data.message);
+      }
       console.log(result);
     } catch (err: any) {
       toast.error(err.message);
