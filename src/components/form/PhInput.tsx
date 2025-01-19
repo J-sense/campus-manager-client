@@ -12,7 +12,7 @@ const PhInput = ({ type, name, label }: TInfo) => {
       <Controller
         name={name}
         render={({ field }) => (
-          <Form.Item label={label}>
+          <Form.Item label={label} style={{ color: "blue" }}>
             <Input {...field} type={type} />
           </Form.Item>
         )}
