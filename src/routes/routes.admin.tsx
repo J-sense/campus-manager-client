@@ -6,6 +6,11 @@ import CreateFaculty from "../pages/admin/CreateFaculty";
 import AcademicSemester from "../pages/admin/academicManagement/AcademicSemester";
 import CreateAcademicSemester from "../pages/admin/academicManagement/CreateAcademicSemester";
 import CreateStudent from "../pages/admin/userManagement/CreateStudent";
+import CreateAcademciDepartment from "../pages/admin/academicManagement/CreateAcademciDepartment";
+import AcademicDepartment from "../pages/admin/academicManagement/AcademicDepartment";
+import GetAllFaculties from "../pages/admin/academicManagement/GetAllFaculties";
+import CreateAcademicFaculty from "../pages/admin/academicManagement/CreateAcademicFaculty";
+import Students from "../pages/admin/userManagement/Students";
 // import { NavLink } from "react-router-dom";
 export type TRoute = {
   path: string;
@@ -35,11 +40,36 @@ export const adminPaths = [
         path: "academic-semester",
         element: <AcademicSemester />,
       },
+      {
+        name: "Create A. Department",
+        path: "create-academic-department",
+        element: <CreateAcademciDepartment />,
+      },
+      {
+        name: "Academic Department",
+        path: "academic-department",
+        element: <AcademicDepartment />,
+      },
+      {
+        name: "Create A. Faculty",
+        path: "create-academic-faculty",
+        element: <CreateAcademicFaculty />,
+      },
+      {
+        name: "Academic Faculties",
+        path: "academic-faculties",
+        element: <GetAllFaculties />,
+      },
     ],
   },
   {
     name: "User Management",
     children: [
+      {
+        name: "Student",
+        path: "students",
+        element: <Students />,
+      },
       {
         name: "Create Admin",
         path: "create-admin",
